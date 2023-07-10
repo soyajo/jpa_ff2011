@@ -1,4 +1,4 @@
-package com.fourfree.jpa_ff2011.cusmember;
+package com.fourfree.jpa_ff2011.cusmember.model;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
