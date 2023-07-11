@@ -1,6 +1,6 @@
-package com.fourfree.jpa_ff2011.cusmember.controller;
+package com.fourfree.jpa_ff2011.cusmembershis.controller;
 
-import com.fourfree.jpa_ff2011.cusmember.entity.Cusmember;
+import com.fourfree.jpa_ff2011.cusmembershis.entity.Cusmembershis;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,26 +13,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/cusmember")
 @RequiredArgsConstructor
-public class CusmemberController {
+@RequestMapping("/cusmembershis")
+@Transactional
+public class CusmembershisController {
 
     private final EntityManager em;
 
-    @GetMapping("/{cname}")
+
     @Transactional(readOnly = true)
+    @GetMapping("/{code}")
     public String get(
             Model model,
-            @PathVariable("cname") String cname
+            @PathVariable("code") String code
     ) {
-        String query = "select c from Cusmember c where c.cname = :cname";
-        List<Cusmember> cusmembers = em.createQuery(query, Cusmember.class)
-                .setParameter("cname", cname)
+
+        String query1 = "select cs from Cusmembershis cs where cs.code = :code";
+        List<Cusmembershis> cusmembershisList = em.createQuery(query1, Cusmembershis.class)
+                .setParameter("code", code)
                 .getResultList();
 
-        model.addAttribute("cusmembers", cusmembers);
 
-        return "cusmember/get";
+        model.addAttribute("cusmembershisList", cusmembershisList);
+
+        return "cusmembershis/get";
     }
-
 }

@@ -1,9 +1,16 @@
-package com.fourfree.jpa_ff2011.cusmember.model;
+package com.fourfree.jpa_ff2011.cusmember.entity;
 
+import com.fourfree.jpa_ff2011.cusmembershis.entity.Cusmembershis;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -51,8 +58,9 @@ public class Cusmember {
     @Column(name = "UDATE")
     private String udate;
 
+    @UpdateTimestamp
     @Column(name = "MODIDATE")
-    private String modidate;
+    private LocalDateTime modidate;
 
     @Column(name = "MODIPROTY")
     private String modiproty;
@@ -106,7 +114,7 @@ public class Cusmember {
     private String birthday;
 
     @Column(name = "AGE")
-    private String age;
+    private Integer age;
 
     @Column(name = "SEX")
     private String sex;
@@ -132,4 +140,6 @@ public class Cusmember {
     @Column(name = "TEL_DELIVERY")
     private String telDelivery;
 
+    @OneToMany(mappedBy = "cusmember")
+    private List<Cusmembershis> cusmembershisList = new ArrayList<>();
 }
